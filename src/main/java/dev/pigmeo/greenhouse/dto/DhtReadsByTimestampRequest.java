@@ -1,5 +1,5 @@
 package dev.pigmeo.greenhouse.dto;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
-public record DhtReadsByTimestampRequest(Instant from, Instant to) {}
+public record DhtReadsByTimestampRequest(LocalDateTime from, LocalDateTime to) {}

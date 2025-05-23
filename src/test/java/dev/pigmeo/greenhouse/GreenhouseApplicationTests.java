@@ -1,21 +1,22 @@
 package dev.pigmeo.greenhouse;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import dev.pigmeo.greenhouse.controllers.HomeControllerTest;
+import dev.pigmeo.greenhouse.controllers.EspController;
 
 @SpringBootTest
 class GreenhouseApplicationTests {
 
 	@Autowired
-	private HomeControllerTest homeController;
+	private EspController espController;
 
 	@Test
 	void contextLoads() {
-		assertThat(homeController).isNotNull();
+		assertThat(espController).isNotNull();
 	}
 
 }

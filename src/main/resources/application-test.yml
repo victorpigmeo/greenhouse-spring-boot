@@ -1,12 +1,10 @@
 spring:
-    profiles:
-        active: dev
     application:
         name: greenhouse
     data:
         mongodb:
-            uri: mongodb://root:example@localhost:27017/greenhouse-dev?authSource=admin
-            database: greenhouse-dev
+            uri: mongodb://root:example@localhost:27017/greenhouse-test?authSource=admin
+            database: greenhouse-test
 
 endpoints:
     esp-server:

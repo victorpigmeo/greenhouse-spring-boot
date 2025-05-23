@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.pigmeo.greenhouse.dto.DhtReadsByTimestampRequest;
+import dev.pigmeo.greenhouse.dto.DhtResponse;
 import dev.pigmeo.greenhouse.models.Dht;
 import dev.pigmeo.greenhouse.repositories.DhtRepository;
 import dev.pigmeo.greenhouse.services.EspService;
@@ -27,8 +28,13 @@ public class EspController {
     private DhtRepository dhtRepository;
 
     @GetMapping("/dht")
-    public List<Dht> getDhtReadsByTimestamp(@RequestBody DhtReadsByTimestampRequest request) {
-        return dhtRepository.findByTimestampBetween(request.from(), request.to());
+    public List<DhtResponse> getDhtReadsByTimestamp(@RequestBody DhtReadsByTimestampRequest request) {
+        List<Dht> dhtReads = dhtRepository.findByTimestampBetween(request.from().toInstant(ZoneOffset.UTC), request.to().toInstant(ZoneOffset.UTC));
+
+        return dhtReads.stream().map((dhtRead) -> {
+            return new DhtResponse(dhtRead.getId(), dhtRead.getTemperature(),
+                    dhtRead.getHumidity(), dhtRead.getHeatIndex(), LocalDateTime.ofInstant(dhtRead.getTimestamp(), ZoneOffset.UTC));
+        }).toList();
     }
     
     @PostMapping("/dht")
